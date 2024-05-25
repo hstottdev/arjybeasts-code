@@ -1,5 +1,5 @@
     
-    //This is a function that
+    //This is a function that generates an RGB value with a set RGB total 
     public static Color GenerateColour(int targetRGBTotal)
     {
         List<float> values = new List<float>();//Random.ColorHSV(0, 1, 0, 1,targetValue,targetValue,1,1)
