@@ -13,6 +13,7 @@ public class FileManager : MonoBehaviour
     public bool thisPC;
     [SerializeField] float fileGenerationDelay;
     public GameObject rightClickWindow;
+    
     [Header("Location")]
     public bool useDeletionManagerFilePath;
     public string currentFilePath = "Desktop";
@@ -20,6 +21,7 @@ public class FileManager : MonoBehaviour
     public string parentFilePath;
     [SerializeField] GameObject backButton;
     [SerializeField] TextMeshProUGUI filePathwayText;
+    
     [Header("Files")]   
     public List<FileData> filesData;
     public List<FileUI> fileUI;
