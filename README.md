@@ -1,4 +1,5 @@
 Code for Arjybeasts contributed by Harry Stott
+<i>Some scripts may contain contributions from the other Authors.</i>
 
 <h3>Dependencies</h3>
   <ul>
@@ -6,7 +7,9 @@ Code for Arjybeasts contributed by Harry Stott
     <li>C#</li>
   </ul>
 
-<h3>Authors</h3>
+<h3>Project Authors</h3>
   <ul>
     <li>Harry Stott</li> 
+    <li>Samuel Glancey</li> 
+    <li>Kristian Baird</li> 
   </ul>
