@@ -1,5 +1,5 @@
-<h3>Code for Arjybeasts contributed by Harry Stott</h3>
-<br><i>Some scripts may contain contributions from the other Authors.</i>
+<h3>Code for Arjybeasts contributed by Harry Stott</h3><br>
+<i>Some scripts may contain contributions from the other Authors.</i>
 
 <h3>Dependencies</h3>
   <ul>
