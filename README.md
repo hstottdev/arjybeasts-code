@@ -1,4 +1,4 @@
-Code for the Arjybeasts prototype
+Code for Arjybeasts contributed by Harry Stott
 
 <h3>Dependencies</h3>
   <ul>
