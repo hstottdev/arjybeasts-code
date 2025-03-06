@@ -133,18 +133,16 @@ public class DraggableWindow : MonoBehaviour
         {
             if (horizontallyOffscreen)
             {
-                //Debug.Log("horiz offscreen");
+                //Horizontal Offscreen
                 actualWindow.localPosition = new Vector2(Mathf.Lerp(actualWindow.localPosition.x, 0, Time.deltaTime * offscreenLerpSpeed), actualWindow.localPosition.y);
             }
             if (verticallyOffscreen)
             {
-                //Debug.Log("vertic offscreen");
+                //Vertical Offscreen
                 actualWindow.localPosition = new Vector2(actualWindow.localPosition.x, Mathf.Lerp(actualWindow.localPosition.y, 0, Time.deltaTime * offscreenLerpSpeed));
             }
         }
-
         PerformScaleIteration();
-
     }
 
     public void PerformScaleIteration()
