@@ -13,6 +13,7 @@ using UnityEditor;
 [RequireComponent(typeof(CanvasGroup))]
 public class DraggableWindow : MonoBehaviour
 {
+        //Editor Utility for Spawning Draggable Windows
         public string windowName;
         #if UNITY_EDITOR
         [MenuItem("GameObject/Draggable Window",false,8)]
@@ -66,7 +67,7 @@ public class DraggableWindow : MonoBehaviour
         initialScale = transform.localScale;
 
         FMODController.instance.PlayEvent("SFX/Open Window");
-
+        
         ScaleIn();
         PerformScaleIteration();
     }
