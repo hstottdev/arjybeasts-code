@@ -54,7 +54,6 @@ public class DraggableWindow : MonoBehaviour
     bool readyToScale;
     private void Start()
     {
-        Debug.Log("here", this);
         sRect = GetComponentInChildren<ScrollRect>();
         actualWindow = sRect.content;
 
@@ -172,7 +171,6 @@ public class DraggableWindow : MonoBehaviour
                     }
                     break;
             }
-
         }
     }
 
