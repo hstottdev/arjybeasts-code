@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+//(SamsStuff is a custom namespace containing some of our in house code)
 using SamsStuff;
 #if UNITY_EDITOR
 using UnityEditor;
