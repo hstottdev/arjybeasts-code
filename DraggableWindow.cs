@@ -122,32 +122,20 @@ public class DraggableWindow : MonoBehaviour
     {
         OffscreenCheck();
 
+        MouseWheelCancel();
+        
+        PerformScaleIteration();
+
+        CorrectOffscreenPosition();
         if (obscuree)
         {
             SetAlpha();
         }
 
-        MouseWheelCancel();
-
-        if (!beingDragged)
-        {
-            if (horizontallyOffscreen)
-            {
-                //Horizontal Offscreen
-                actualWindow.localPosition = new Vector2(Mathf.Lerp(actualWindow.localPosition.x, 0, Time.deltaTime * offscreenLerpSpeed), actualWindow.localPosition.y);
-            }
-            if (verticallyOffscreen)
-            {
-                //Vertical Offscreen
-                actualWindow.localPosition = new Vector2(actualWindow.localPosition.x, Mathf.Lerp(actualWindow.localPosition.y, 0, Time.deltaTime * offscreenLerpSpeed));
-            }
-        }
-        PerformScaleIteration();
     }
-
+    //Making the window scale up or down
     public void PerformScaleIteration()
     {
-
         if (readyToScale)
         {
             switch (scaleState)
@@ -231,11 +219,27 @@ public class DraggableWindow : MonoBehaviour
         return false;//there was not an obscurer in my way
     }
 
+    //Function to recentre window if it's been dragged offscreen
+    void CorrectOffscreenPosition()
+    {
+        if (!beingDragged)
+        {
+            if (horizontallyOffscreen)
+            {
+                //Horizontal Offscreen
+                actualWindow.localPosition = new Vector2(Mathf.Lerp(actualWindow.localPosition.x, 0, Time.deltaTime * offscreenLerpSpeed), actualWindow.localPosition.y);
+            }
+            if (verticallyOffscreen)
+            {
+                //Vertical Offscreen
+                actualWindow.localPosition = new Vector2(actualWindow.localPosition.x, Mathf.Lerp(actualWindow.localPosition.y, 0, Time.deltaTime * offscreenLerpSpeed));
+            }
+        }
+    }
+    
     void SetAlpha()
     {
         CanvasGroup myCanvasGroup = GetComponent<CanvasGroup>();
-
-        //Debug.Log(gameObject.name +" : "+ transform.GetSiblingIndex());
 
         if (isObscured())
         {
