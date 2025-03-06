@@ -62,14 +62,20 @@ public class DraggableWindow : MonoBehaviour
         FixSiblingRelationship();
         originalSensitivity = sRect.scrollSensitivity;
 
+        //Kristian's Sound Event
+        FMODController.instance.PlayEvent("SFX/Open Window");
+        
         scaleProgress = 0f;
         readyToScale = true;
         initialScale = transform.localScale;
-
-        FMODController.instance.PlayEvent("SFX/Open Window");
-        
         ScaleIn();
         PerformScaleIteration();
+    }
+    
+    enum ScaleState
+    { 
+        In,
+        Out
     }
 
     void ScaleIn()
@@ -80,6 +86,35 @@ public class DraggableWindow : MonoBehaviour
     void ScaleOut()
     {
         scaleState = ScaleState.Out;
+    }
+
+    //Making the window scale up or down
+    public void PerformScaleIteration()
+    {
+        if (readyToScale)
+        {
+            switch (scaleState)
+            {
+                case ScaleState.In:
+                    transform.localScale = Vector3.Lerp(initialScale * squeezeAmount, initialScale, Console.Ease(scaleProgress, Console.EaseMode.EaseOut));
+                    scaleProgress += Time.deltaTime / scaleTime;
+                    if (scaleProgress >= 1)
+                    {
+                        transform.localScale = initialScale;
+                        readyToScale = false;
+                    }
+                    break;
+                case ScaleState.Out:
+                    transform.localScale = Vector3.Lerp(initialScale * squeezeAmount, initialScale, Console.Ease(scaleProgress, Console.EaseMode.EaseOut));
+                    scaleProgress -= Time.deltaTime / scaleTime;
+                    if (scaleProgress <= 0)
+                    {
+                        transform.localScale = initialScale * squeezeAmount;
+                        readyToScale = false;
+                    }
+                    break;
+            }
+        }
     }
 
     void SetCanvas()
@@ -112,13 +147,6 @@ public class DraggableWindow : MonoBehaviour
         }
     }
 
-    enum ScaleState
-    { 
-        In,
-        Out
-    }
-
-
     private void Update()
     {
         OffscreenCheck();
@@ -131,35 +159,6 @@ public class DraggableWindow : MonoBehaviour
         if (obscuree)
         {
             SetAlpha();
-        }
-
-    }
-    //Making the window scale up or down
-    public void PerformScaleIteration()
-    {
-        if (readyToScale)
-        {
-            switch (scaleState)
-            {
-                case ScaleState.In:
-                    transform.localScale = Vector3.Lerp(initialScale * squeezeAmount, initialScale, Console.Ease(scaleProgress, Console.EaseMode.EaseOut));
-                    scaleProgress += Time.deltaTime / scaleTime;
-                    if (scaleProgress >= 1)
-                    {
-                        transform.localScale = initialScale;
-                        readyToScale = false;
-                    }
-                    break;
-                case ScaleState.Out:
-                    transform.localScale = Vector3.Lerp(initialScale * squeezeAmount, initialScale, Console.Ease(scaleProgress, Console.EaseMode.EaseOut));
-                    scaleProgress -= Time.deltaTime / scaleTime;
-                    if (scaleProgress <= 0)
-                    {
-                        transform.localScale = initialScale * squeezeAmount;
-                        readyToScale = false;
-                    }
-                    break;
-            }
         }
     }
 
@@ -174,7 +173,7 @@ public class DraggableWindow : MonoBehaviour
             sRect.scrollSensitivity = 0;
         }
     }
-
+    //Making position checks to see if the window is offscreen
     void OffscreenCheck()
     {
         Vector3 localScale = actualWindow.transform.localScale;
