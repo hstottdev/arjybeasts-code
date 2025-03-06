@@ -54,7 +54,6 @@ public class DraggableWindow : MonoBehaviour
     private void Start()
     {
         Debug.Log("here", this);
-        //Debug.Break();
         sRect = GetComponentInChildren<ScrollRect>();
         actualWindow = sRect.content;
 
