@@ -7,7 +7,7 @@ using SamsStuff;
 using static GameManager;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+//Script for the File Deletion and File Management in Arjybeasts
 public class FileManager : MonoBehaviour
 {
     public bool thisPC;
@@ -46,7 +46,6 @@ public class FileManager : MonoBehaviour
     public static Dictionary<FileData, Color> randomColourUnlockData = new Dictionary<FileData, Color>();
 
     public static FileData deleteOnSceneLoaded;
-
 
     /// <summary>
     /// <returns><strong>[beastName][id]</strong></returns>
@@ -134,9 +133,7 @@ public class FileManager : MonoBehaviour
             {
                 GetComponentInParent<DraggableWindow>().GetComponent<Image>().color = settings.windowColour;
             }
-        }
-
-        
+        } 
     }
 
     public static bool isValidPath(string path)//checks if the given file path is valid
@@ -177,8 +174,6 @@ public class FileManager : MonoBehaviour
         allFilesThisFolder.AddRange(Resources.LoadAll<FileData>(filePath));
         List<FileData> filesGenerated = new List<FileData>();
 
-       //Debug.Log($"randomFileData length: {randomFileData.Count}");
-
         if (randomFileData.TryGetValue(filePath, out List<FileData> existingData))//if the files for this window have already been defined
         {
             foreach(FileData f in allFilesThisFolder)
@@ -194,21 +189,17 @@ public class FileManager : MonoBehaviour
             List<FileData> allFiles = new List<FileData>();//create a list containing every file for this window
 
             allFiles.AddRange(allFilesThisFolder);//retrieve which files need to be loaded 
-            //allFiles.AddRange(GetSubfolderFiles(filePath));
 
             if (randomized)
             {
                 Console.Shuffle(allFiles);//shuffle the list
                 Debug.Log($"generating new random data for file path: {filePath} ");
             }
-
             List<FileData> newRandomData = new List<FileData>();
-
             foreach (FileData f in allFiles)//add files from the shuffled list until the storage cap is reached
             {
                 try
                 {
-                    //Debug.Log($"Checking file:{f.fileName}");
                     float total = GetStorageTotal(newRandomData, f.type.typeID);//get the current total of the files generated of this type
                     float cap = GetStorageCap(f.type.typeID,GetWindowSettings(filePath));
 
@@ -220,7 +211,6 @@ public class FileManager : MonoBehaviour
                     //all the above booleans must be false in order for the file to be spawned
                     bool useFile = !StorageCapReached && !blockEditorFile && !blockMissingBeast;
 
-                    //Debug.Log("used up " + GetStorageTotal(filesData, f.type.typeID) + " Bytes of " + f.type.typeName + " out of " + GetStorageCap(f.type.typeID) + " Bytes.");
                     if (useFile)//if not been deleted and storage cap not reached, and not editor only
                     {
                         newRandomData.Add(f);
@@ -237,8 +227,6 @@ public class FileManager : MonoBehaviour
             }
             Console.SortFiles(newRandomData);
             Console.SortFiles(filesGenerated);
-
-            //colourList.Sort((a, b) => GetHue(a).CompareTo(GetHue(b)));
             randomFileData.Add(filePath, newRandomData);//add the data to the dictionary       
         }
         filesGenerated = RemoveDeletedFiles(filesGenerated);//remove any files that have been deleted;
@@ -272,7 +260,6 @@ public class FileManager : MonoBehaviour
                 cap = _cap;
             }
         }
-        //Debug.Log($"{fileType} cap: {cap}");
         return cap;
     }
 
@@ -281,7 +268,6 @@ public class FileManager : MonoBehaviour
         float total = 0;
         foreach(FileData file in fileList)
         {
-
             if(file.type.typeID == type)
             {
                 //if its a subfolder
@@ -301,7 +287,6 @@ public class FileManager : MonoBehaviour
     public static float GetTotalStorageOfFolder(string filePath)
     {
         float folderTotal = 0;
-        //Debug.Log($"checking total storage of subfolder: {filePath}");
         List<FileData> files = GetFilesAtPathway(filePath);
         foreach (FileData file in files)
         {
@@ -369,9 +354,6 @@ public class FileManager : MonoBehaviour
                 fileUI.Remove(file2);
             }
         }
-
-        
-
         if(filePathwayText != null)
         {
             if (visualFilePath == "")
@@ -447,10 +429,9 @@ public class FileManager : MonoBehaviour
         {
             Console.DeleteBeastFile(s);
         }
-
         copiedBeastFiles.Clear();
     }
-
+    
     public void BackButton()
     {
         if (isValidPath(parentFilePath))
